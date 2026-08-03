@@ -19,6 +19,7 @@ body {
   margin: auto;
   max-width: 1000px;
   min-height: 100vh;
+  background-color:rgb(180, 180, 178)
 }
 *{
   padding:0;
