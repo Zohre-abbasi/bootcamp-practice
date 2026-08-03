@@ -40,10 +40,52 @@ font-size:22px;
 
 cursor:pointer;
 
+
 }
 
 .table tr:hover{
 
 background:#f5f5f5;
+
+}
+.menu{
+
+position:absolute;
+
+background:white;
+
+border:1px solid #ccc;
+
+border-radius:6px;
+
+display:flex;
+
+/* flex-direction:column; */
+
+/* min-width:110px; */
+
+box-shadow:0 5px 12px rgba(0,0,0,.15);
+
+z-index:100;
+
+}
+
+.menu button{
+
+padding:15px;
+
+background:white;
+
+border:none;
+
+cursor:pointer;
+
+text-align:right;
+
+}
+
+.menu button:hover{
+
+background:#f2f2f2;
 
 }

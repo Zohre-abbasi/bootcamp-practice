@@ -1,16 +1,12 @@
 import styles from "./ContactTable.module.css";
+import { useState } from "react";
 
-function ContactTable({
-  contacts,
-  isSelectionMode,
-}) {
+function ContactTable({ contacts, isSelectionMode,editContact,deleteContact}) {
+  const [openMenu, setOpenMenu] = useState(null);
   return (
     <table className={styles.table}>
-
-      <thead >
-
-        <tr >
-
+      <thead>
+        <tr>
           {isSelectionMode && <th></th>}
 
           <th>نام</th>
@@ -18,55 +14,57 @@ function ContactTable({
           <th>ایمیل</th>
 
           <th></th>
-
         </tr>
-
       </thead>
 
       <tbody>
-
         {contacts.map((contact) => (
-
           <tr key={contact.id}>
-
             {isSelectionMode && (
-
               <td>
-
                 <input type="checkbox" />
-
               </td>
-
             )}
 
-            <td>
+            <td>{contact.fullName}</td>
 
-              {contact.fullName}
-
-            </td>
+            <td>{contact.email}</td>
 
             <td>
-
-              {contact.email}
-
-            </td>
-
-            <td>
-
-              <button>
-
+              <button
+                onClick={() =>
+                  setOpenMenu(openMenu === contact.id ? null : contact.id)
+                }
+              >
                 ⋮
-
               </button>
+              {openMenu === contact.id && (
+                <div className={styles.menu}>
+                  <button
+                    onClick={() => {
+                      editContact(contact);
 
+                      setOpenMenu(null);
+                    }}
+                  >
+                    ویرایش
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      deleteContact(contact);
+
+                      setOpenMenu(null);
+                    }}
+                  >
+                    حذف
+                  </button>
+                </div>
+              )}
             </td>
-
           </tr>
-
         ))}
-
       </tbody>
-
     </table>
   );
 }
