@@ -43,7 +43,8 @@ function App() {
   };
 
   const toggleSelectionMode = () => {
-    setIsSelectionMode((prev) => !prev);
+    setIsSelectionMode(!isSelectionMode);
+    setSelectedContacts([]);
   };
 
   const editContact = (contact) => {
@@ -58,15 +59,45 @@ function App() {
   };
 
   const confirmDelete = () => {
-    const newContacts = contacts.filter(
-      (item) => item.id !== selectedContact.id,
-    );
-    setContacts(newContacts);
-    localStorage.setItem("contacts", JSON.stringify(newContacts));
+    if (modalType === "single") {
+      const newContacts = contacts.filter(
+        (item) => item.id !== selectedContact.id,
+      );
+
+      setContacts(newContacts);
+
+      localStorage.setItem(
+        "contacts",
+
+        JSON.stringify(newContacts),
+      );
+
+      showToast("مخاطب با موفقیت حذف شد.");
+    } else if (modalType === "multiple") {
+      const newContacts = contacts.filter(
+        (item) => !selectedContacts.includes(item.id),
+      );
+
+      setContacts(newContacts);
+
+      localStorage.setItem(
+        "contacts",
+
+        JSON.stringify(newContacts),
+      );
+
+      setSelectedContacts([]);
+
+      setIsSelectionMode(false);
+
+      showToast("مخاطبین با موفقیت حذف شدند.");
+    }
+
     setShowModal(false);
+
     setSelectedContact(null);
 
-    showToast("مخاطب با موفقیت حذف شد");
+    setModalType("");
   };
 
   const closeModal = () => {
@@ -78,7 +109,9 @@ function App() {
   const showToast = (message) => {
     setToast(message);
 
-    setTimeout(() => {
+    clearTimeout(window.toastTimer);
+
+    window.toastTimer = setTimeout(() => {
       setToast("");
     }, 3000);
   };
@@ -129,6 +162,15 @@ function App() {
     setShowModal(true);
   };
 
+  const filteredContacts = contacts.filter((contact) => {
+    const value = search.toLowerCase().trim();
+
+    return (
+      contact.fullName.toLowerCase().includes(value) ||
+      contact.email.toLowerCase().includes(value)
+    );
+  });
+
   return (
     <>
       <Header
@@ -140,7 +182,7 @@ function App() {
         deleteSelectedContacts={deleteSelectedContacts}
       />
       <ContactTable
-        contacts={contacts}
+        contacts={filteredContacts}
         isSelectionMode={isSelectionMode}
         editContact={editContact}
         deleteContact={deleteContact}

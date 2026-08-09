@@ -7,7 +7,7 @@ function ContactTable({
   editContact,
   deleteContact,
   selectedContacts,
-  toggleSelect
+  toggleSelect,
 }) {
   const [openMenu, setOpenMenu] = useState(null);
   return (
@@ -25,54 +25,60 @@ function ContactTable({
       </thead>
 
       <tbody>
-        {contacts.map((contact) => (
-          <tr key={contact.id}>
-            {isSelectionMode && (
-              <td>
-                <input
-                  type="checkbox"
-                  checked={selectedContacts.includes(contact.id)}
-                  onChange={() => toggleSelect(contact.id)}
-                />
-              </td>
-            )}
-
-            <td>{contact.fullName}</td>
-
-            <td>{contact.email}</td>
-
-            <td>
-              <button
-                onClick={() =>
-                  setOpenMenu(openMenu === contact.id ? null : contact.id)
-                }
-              >
-                ⋮
-              </button>
-              {openMenu === contact.id && (
-                <div className={styles.menu}>
-                  <button
-                    onClick={() => {
-                      editContact(contact);
-                      setOpenMenu(null);
-                    }}
-                  >
-                    ویرایش
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      deleteContact(contact);
-                      setOpenMenu(null);
-                    }}
-                  >
-                    حذف
-                  </button>
-                </div>
-              )}
-            </td>
+        {contacts.length === 0 ? (
+          <tr>
+            <td colSpan="4">مخاطبی وجود ندارد</td>
           </tr>
-        ))}
+        ) : (
+          contacts.map((contact) => (
+            <tr key={contact.id}>
+              {isSelectionMode && (
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={selectedContacts.includes(contact.id)}
+                    onChange={() => toggleSelect(contact.id)}
+                  />
+                </td>
+              )}
+
+              <td>{contact.fullName}</td>
+
+              <td>{contact.email}</td>
+
+              <td>
+                <button
+                  onClick={() =>
+                    setOpenMenu(openMenu === contact.id ? null : contact.i)
+                  }
+                >
+                  ⋮
+                </button>
+                {openMenu === contact.id && (
+                  <div className={styles.menu}>
+                    <button
+                      onClick={() => {
+                        editContact(contact);
+                        setOpenMenu(null);
+                      }}
+                    >
+                      ویرایش
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        deleteContact(contact);
+                        setOpenMenu(null);
+                      }}
+                    >
+                      حذف
+                    </button>
+                  </div>
+                )}
+              </td>
+            </tr>
+          ))
+        )}
       </tbody>
     </table>
   );
