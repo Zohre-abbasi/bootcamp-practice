@@ -1,8 +1,14 @@
 import { useState } from "react";
 import styles from "./ContactTable.module.css";
 
-
-function ContactTable({ contacts, isSelectionMode,editContact,deleteContact}) {
+function ContactTable({
+  contacts,
+  isSelectionMode,
+  editContact,
+  deleteContact,
+  selectedContacts,
+  toggleSelect
+}) {
   const [openMenu, setOpenMenu] = useState(null);
   return (
     <table className={styles.table}>
@@ -23,7 +29,11 @@ function ContactTable({ contacts, isSelectionMode,editContact,deleteContact}) {
           <tr key={contact.id}>
             {isSelectionMode && (
               <td>
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  checked={selectedContacts.includes(contact.id)}
+                  onChange={() => toggleSelect(contact.id)}
+                />
               </td>
             )}
 

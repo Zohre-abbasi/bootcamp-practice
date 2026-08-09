@@ -13,6 +13,8 @@ function App() {
   const [selectedContact, setSelectedContact] = useState(null);
   const [toast, setToast] = useState("");
   const [editingContact, setEditingContact] = useState(null);
+  const [selectedContacts, setSelectedContacts] = useState([]);
+  const [modalType, setModalType] = useState("");
 
   const [contacts, setContacts] = useState(() => {
     const savedContacts = localStorage.getItem("contacts");
@@ -51,6 +53,7 @@ function App() {
 
   const deleteContact = (contact) => {
     setSelectedContact(contact);
+    setModalType("single");
     setShowModal(true);
   };
 
@@ -108,6 +111,24 @@ function App() {
     showToast("مخاطب با موفقیت ویرایش شد.");
   };
 
+  const toggleSelect = (id) => {
+    if (selectedContacts.includes(id)) {
+      setSelectedContacts(selectedContacts.filter((item) => item !== id));
+    } else {
+      setSelectedContacts([...selectedContacts, id]);
+    }
+  };
+
+  const deleteSelectedContacts = () => {
+    if (selectedContacts.length === 0) {
+      showToast("هیچ مخاطبی انتخاب نشده است.");
+
+      return;
+    }
+    setModalType("multiple");
+    setShowModal(true);
+  };
+
   return (
     <>
       <Header
@@ -115,17 +136,25 @@ function App() {
         setSearch={setSearch}
         openForm={openForm}
         toggleSelectionMode={toggleSelectionMode}
+        isSelectionMode={isSelectionMode}
+        deleteSelectedContacts={deleteSelectedContacts}
       />
       <ContactTable
         contacts={contacts}
         isSelectionMode={isSelectionMode}
         editContact={editContact}
         deleteContact={deleteContact}
+        selectedContacts={selectedContacts}
+        toggleSelect={toggleSelect}
       />
       {showModal && (
         <Modal
           title="حذف مخاطب"
-          message={`آیا از حذف ${selectedContact.fullName} مطمئن هستید؟`}
+          message={
+            modalType === "single"
+              ? `آیا از حذف "${selectedContact.fullName}"راضی هستید`
+              : "آیا از حذف گروهی مخاطبین مطمئن هستید؟"
+          }
           onConfirm={confirmDelete}
           onCancel={closeModal}
         />
