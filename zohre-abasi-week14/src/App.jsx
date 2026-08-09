@@ -3,6 +3,7 @@ import ContactTable from "./components/ContactTable.jsx";
 import { useState } from "react";
 import Modal from "./components/Modal.jsx";
 import Toast from "./components/Toast.jsx";
+import ContactForm from "./components/ContactForm.jsx";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -17,7 +18,7 @@ function App() {
       fullName: "سینا",
       email: "sina.gh@gmail.com",
       job: "برنامه نویس",
-      phone: "091200000000",
+      phone: "09120000000",
     },
     {
       id: 2,
@@ -72,6 +73,20 @@ function App() {
     }, 3000);
   };
 
+  const addContact = (contact) => {
+    const newContacts = [...contacts, contact];
+
+    setContacts(newContacts);
+
+    localStorage.setItem(
+      "contacts",
+
+      JSON.stringify(newContacts),
+    );
+
+    showToast("مخاطب با موفقیت اضافه شد.");
+  };
+
   return (
     <>
       <Header
@@ -89,12 +104,18 @@ function App() {
       {showModal && (
         <Modal
           title="حذف مخاطب"
-          message={`آیا از حذف ${selectedContact.fullName}مطمئن هستید؟`}
+          message={`آیا از حذف ${selectedContact.fullName} مطمئن هستید؟`}
           onConfirm={confirmDelete}
           onCancel={closeModal}
         />
       )}
       {toast && <Toast message={toast} />}
+      {isFormOpen && (
+        <ContactForm
+          addContact={addContact}
+          closeForm={() => setIsFormOpen(false)}
+        />
+      )}
     </>
   );
 }
