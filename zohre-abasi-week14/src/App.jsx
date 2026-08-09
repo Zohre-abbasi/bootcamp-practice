@@ -1,10 +1,13 @@
 import Header from "./components/Header.jsx";
 import ContactTable from "./components/ContactTable.jsx";
 import { useState } from "react";
+import Modal from "./components/Modal.jsx";
 function App() {
   const [search, setSearch] = useState("");
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isSelectionMode, setIsSelectionMode] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedContact, setSelectedContact] = useState(null);
   const [contacts, setContacts] = useState([
     {
       id: 1,
@@ -35,7 +38,26 @@ function App() {
   };
 
   const deleteContact = (contact) => {
-    console.log(contact);
+    setSelectedContact(contact);
+    setShowModal(true);
+  };
+
+  const confirmDelete = () => {
+    const newContacts = contacts.filter(
+      (item) => item.id !== selectedContact.id,
+    );
+
+    setContacts(newContacts);
+
+    setShowModal(false);
+
+    setSelectedContact(null);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+
+    setSelectedContact(null);
   };
 
   return (
@@ -46,7 +68,20 @@ function App() {
         openForm={openForm}
         toggleSelectionMode={toggleSelectionMode}
       />
-      <ContactTable contacts={contacts} isSelectionMode={isSelectionMode} editContact={editContact} deleteContact={deleteContact} />
+      <ContactTable
+        contacts={contacts}
+        isSelectionMode={isSelectionMode}
+        editContact={editContact}
+        deleteContact={deleteContact}
+      />
+      {showModal && (
+        <Modal
+          title="حذف مخاطب"
+          message={`آیا از حذف ${selectedContact.fullName}مطمئن هستید؟`}
+          onConfirm={confirmDelete}
+          onCancel={closeModal}
+        />
+      )}
     </>
   );
 }
