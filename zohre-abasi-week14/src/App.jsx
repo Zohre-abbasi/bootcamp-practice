@@ -2,12 +2,15 @@ import Header from "./components/Header.jsx";
 import ContactTable from "./components/ContactTable.jsx";
 import { useState } from "react";
 import Modal from "./components/Modal.jsx";
+import Toast from "./components/Toast.jsx";
+
 function App() {
   const [search, setSearch] = useState("");
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isSelectionMode, setIsSelectionMode] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedContact, setSelectedContact] = useState(null);
+  const [toast, setToast] = useState("");
   const [contacts, setContacts] = useState([
     {
       id: 1,
@@ -52,12 +55,21 @@ function App() {
     setShowModal(false);
 
     setSelectedContact(null);
+    showToast("مخاطب با موفقیت حذف شد");
   };
 
   const closeModal = () => {
     setShowModal(false);
 
     setSelectedContact(null);
+  };
+
+  const showToast = (message) => {
+    setToast(message);
+
+    setTimeout(() => {
+      setToast("");
+    }, 3000);
   };
 
   return (
@@ -82,6 +94,7 @@ function App() {
           onCancel={closeModal}
         />
       )}
+      {toast && <Toast message={toast} />}
     </>
   );
 }
