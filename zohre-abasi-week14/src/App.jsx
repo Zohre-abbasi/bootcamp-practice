@@ -12,23 +12,30 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [selectedContact, setSelectedContact] = useState(null);
   const [toast, setToast] = useState("");
-  const [contacts, setContacts] = useState([
-    {
-      id: 1,
-      fullName: "سینا",
-      email: "sina.gh@gmail.com",
-      job: "برنامه نویس",
-      phone: "09120000000",
-    },
-    {
-      id: 2,
-      fullName: "محمد",
-      email: "mohammad1388@mail.com",
-      job: "طراح",
-      phone: "09120111111",
-    },
-  ]);
+  const [editingContact, setEditingContact] = useState(null);
 
+  const [contacts, setContacts] = useState(() => {
+    const savedContacts = localStorage.getItem("contacts");
+
+    return savedContacts
+      ? JSON.parse(savedContacts)
+      : [
+          {
+            id: 1,
+            fullName: "سینا",
+            email: "sina.gh@gmail.com",
+            job: "برنامه نویس",
+            phone: "09120000000",
+          },
+          {
+            id: 2,
+            fullName: "محمد",
+            email: "mohammad1388@mail.com",
+            job: "طراح",
+            phone: "09120111111",
+          },
+        ];
+  });
   const openForm = () => {
     setIsFormOpen(true);
   };
@@ -38,7 +45,8 @@ function App() {
   };
 
   const editContact = (contact) => {
-    console.log(contact);
+    setEditingContact(contact);
+    setIsFormOpen(true);
   };
 
   const deleteContact = (contact) => {
@@ -50,12 +58,11 @@ function App() {
     const newContacts = contacts.filter(
       (item) => item.id !== selectedContact.id,
     );
-
     setContacts(newContacts);
-
+    localStorage.setItem("contacts", JSON.stringify(newContacts));
     setShowModal(false);
-
     setSelectedContact(null);
+
     showToast("مخاطب با موفقیت حذف شد");
   };
 
@@ -78,13 +85,27 @@ function App() {
 
     setContacts(newContacts);
 
+    localStorage.setItem("contacts", JSON.stringify(newContacts));
+
+    showToast("مخاطب با موفقیت اضافه شد.");
+  };
+
+  const updateContact = (updatedContact) => {
+    const newContacts = contacts.map((contact) =>
+      contact.id === updatedContact.id ? updatedContact : contact,
+    );
+
+    setContacts(newContacts);
+
     localStorage.setItem(
       "contacts",
 
       JSON.stringify(newContacts),
     );
 
-    showToast("مخاطب با موفقیت اضافه شد.");
+    setEditingContact(null);
+
+    showToast("مخاطب با موفقیت ویرایش شد.");
   };
 
   return (
@@ -113,7 +134,12 @@ function App() {
       {isFormOpen && (
         <ContactForm
           addContact={addContact}
-          closeForm={() => setIsFormOpen(false)}
+          updateContact={updateContact}
+          editingContact={editingContact}
+          closeForm={() => {
+            setIsFormOpen(false);
+            setEditingContact(null);
+          }}
         />
       )}
     </>

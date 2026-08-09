@@ -1,5 +1,6 @@
-import styles from "./ContactTable.module.css";
 import { useState } from "react";
+import styles from "./ContactTable.module.css";
+
 
 function ContactTable({ contacts, isSelectionMode,editContact,deleteContact}) {
   const [openMenu, setOpenMenu] = useState(null);
@@ -43,7 +44,6 @@ function ContactTable({ contacts, isSelectionMode,editContact,deleteContact}) {
                   <button
                     onClick={() => {
                       editContact(contact);
-
                       setOpenMenu(null);
                     }}
                   >
@@ -53,7 +53,6 @@ function ContactTable({ contacts, isSelectionMode,editContact,deleteContact}) {
                   <button
                     onClick={() => {
                       deleteContact(contact);
-
                       setOpenMenu(null);
                     }}
                   >

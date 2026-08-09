@@ -1,13 +1,19 @@
 import { useState } from "react";
 import styles from "./ContactForm.module.css";
 
-function ContactForm({ addContact, closeForm }) {
+function ContactForm({ addContact, closeForm, editingContact, updateContact }) {
   const [form, setForm] = useState({
-    fullName: "",
-    email: "",
-    job: "",
-    phone: "",
+    id: editingContact?.id || null,
+
+    fullName: editingContact?.fullName || "",
+
+    email: editingContact?.email || "",
+
+    job: editingContact?.job || "",
+
+    phone: editingContact?.phone || "",
   });
+
   const [errors, setErrors] = useState({});
 
   const changeHandler = (e) => {
@@ -49,20 +55,21 @@ function ContactForm({ addContact, closeForm }) {
 
     if (!validate()) return;
 
-    addContact({
-      id: Date.now(),
-
-      ...form,
-    });
+    if (editingContact) {
+      updateContact(form);
+    } else {
+      addContact({
+        ...form,
+        id: Date.now(),
+      });
+    }
 
     closeForm();
   };
-
   return (
     <div className={styles.overlay}>
       <form className={styles.form} onSubmit={submitHandler}>
-        <h2>افزودن مخاطب</h2>
-
+        <h2>{editingContact ? "ویرایش مخاطب" : "افزودن مخاطب"}</h2>
         <input
           name="fullName"
           placeholder="نام و نام خانوادگی"
@@ -104,7 +111,7 @@ function ContactForm({ addContact, closeForm }) {
             انصراف
           </button>
 
-          <button>ثبت مخاطب</button>
+          <button>{editingContact ? "اعمال تغییرات" : "ثبت مخاطب"}</button>
         </div>
       </form>
     </div>
