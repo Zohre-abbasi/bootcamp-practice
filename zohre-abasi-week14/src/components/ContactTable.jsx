@@ -49,7 +49,7 @@ function ContactTable({
               <td>
                 <button
                   onClick={() =>
-                    setOpenMenu(openMenu === contact.id ? null : contact.i)
+                    setOpenMenu(openMenu === contact.id ? null : contact.id)
                   }
                 >
                   ⋮
