@@ -1,13 +1,7 @@
-import { useState } from "react";
-import Input from "./Components/Input";
+import CityInput from "./Components/CityInput";
 
 function App() {
-  const [inputValue, setInputValue] = useState("");
-
-  const handleChange = (event) => {
-    setInputValue(event.target.value);
-  };
-  return <Input handleChange={handleChange} hint="" />;
+  return <CityInput />;
 }
 
 export default App;
