@@ -1,0 +1,57 @@
+.overlay {
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.4);
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+}
+
+.form {
+  width: 420px;
+
+  background: white;
+
+  padding: 25px;
+
+  border-radius: 10px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+.form input {
+  padding: 12px;
+
+  border: 1px solid #ccc;
+
+  outline: none;
+}
+
+.form span {
+  color: red;
+
+  font-size: 13px;
+}
+
+.buttons {
+  display: flex;
+
+  justify-content: end;
+
+  gap: 10px;
+}
+
+.buttons button {
+  padding: 10px 20px;
+
+  cursor: pointer;
+}
