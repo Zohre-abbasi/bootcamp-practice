@@ -2,8 +2,8 @@ import { useState, useContext } from "react";
 import { ContactContext } from "../context/ContactContext";
 import styles from "./ContactForm.module.css";
 
-function ContactForm({ closeForm, editingContact }) {
-  
+function ContactForm({ closeForm, editingContact,showToast }) {
+
   const { addContact, updateContact } = useContext(ContactContext);
 
   const [form, setForm] = useState({
@@ -61,11 +61,13 @@ function ContactForm({ closeForm, editingContact }) {
 
     if (editingContact) {
       updateContact(form);
+      showToast("مخاطب با موفقیت ویرایش شد")
     } else {
       addContact({
         ...form,
         id: Date.now(),
       });
+      showToast("مخاطب با موفقیت اضافه شد")
     }
 
     closeForm();

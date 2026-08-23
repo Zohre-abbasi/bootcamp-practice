@@ -10,12 +10,10 @@ import ContactForm from "./components/ContactForm.jsx";
 function App() {
   const {
     contacts,
-    addContact,
-    updateContact,
     deleteContact: deleteContactFromContext,
     deleteMultipleContacts,
     selectedContacts,
-    setSelectedContacts
+    setSelectedContacts,
   } = useContext(ContactContext);
 
   const [search, setSearch] = useState("");
@@ -86,17 +84,15 @@ function App() {
     }, 3000);
   };
 
-  const handleAddContact = (contact) => {
-    addContact(contact);
-    showToast("مخاطب با موفقیت اضافه شد");
-  };
+  // const handleAddContact = (contact) => {
+  //   addContact(contact);
+  //   showToast("مخاطب با موفقیت اضافه شد");
+  // };
 
-  const handleUpdateContact=(contact)=>{
-    updateContact(contact);
-    showToast("مخاطب با موفقیت ویرایش شد")
-  }
-
-  
+  // const handleUpdateContact=(contact)=>{
+  //   updateContact(contact);
+  //   showToast("مخاطب با موفقیت ویرایش شد")
+  // }
 
   const deleteSelectedContacts = () => {
     if (selectedContacts.length === 0) {
@@ -153,6 +149,7 @@ function App() {
             setIsFormOpen(false);
             setEditingContact(null);
           }}
+          showToast={showToast}
         />
       )}
     </>
