@@ -1,11 +1,15 @@
+import { useContext,useState } from "react";
+import { ContactContext } from "./context/ContactContext.jsx";
+
 import Header from "./components/Header.jsx";
 import ContactTable from "./components/ContactTable.jsx";
-import { useState } from "react";
 import Modal from "./components/Modal.jsx";
 import Toast from "./components/Toast.jsx";
 import ContactForm from "./components/ContactForm.jsx";
 
 function App() {
+  const{contacts,setContacts}=useContext(ContactContext)
+
   const [search, setSearch] = useState("");
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isSelectionMode, setIsSelectionMode] = useState(false);
@@ -16,28 +20,7 @@ function App() {
   const [selectedContacts, setSelectedContacts] = useState([]);
   const [modalType, setModalType] = useState("");
 
-  const [contacts, setContacts] = useState(() => {
-    const savedContacts = localStorage.getItem("contacts");
-
-    return savedContacts
-      ? JSON.parse(savedContacts)
-      : [
-          {
-            id: 1,
-            fullName: "سینا",
-            email: "sina.gh@gmail.com",
-            job: "برنامه نویس",
-            phone: "09120000000",
-          },
-          {
-            id: 2,
-            fullName: "محمد",
-            email: "mohammad1388@mail.com",
-            job: "طراح",
-            phone: "09120111111",
-          },
-        ];
-  });
+  
   const openForm = () => {
     setIsFormOpen(true);
   };
