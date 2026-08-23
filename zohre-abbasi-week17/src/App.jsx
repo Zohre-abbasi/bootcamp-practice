@@ -14,6 +14,8 @@ function App() {
     updateContact,
     deleteContact: deleteContactFromContext,
     deleteMultipleContacts,
+    selectedContacts,
+    setSelectedContacts
   } = useContext(ContactContext);
 
   const [search, setSearch] = useState("");
@@ -23,7 +25,7 @@ function App() {
   const [selectedContact, setSelectedContact] = useState(null);
   const [toast, setToast] = useState("");
   const [editingContact, setEditingContact] = useState(null);
-  const [selectedContacts, setSelectedContacts] = useState([]);
+  // const [selectedContacts, setSelectedContacts] = useState([]);
   const [modalType, setModalType] = useState("");
 
   const openForm = () => {
@@ -94,13 +96,7 @@ function App() {
     showToast("مخاطب با موفقیت ویرایش شد")
   }
 
-  const toggleSelect = (id) => {
-    if (selectedContacts.includes(id)) {
-      setSelectedContacts(selectedContacts.filter((item) => item !== id));
-    } else {
-      setSelectedContacts([...selectedContacts, id]);
-    }
-  };
+  
 
   const deleteSelectedContacts = () => {
     if (selectedContacts.length === 0) {
@@ -136,8 +132,6 @@ function App() {
         isSelectionMode={isSelectionMode}
         editContact={editContact}
         deleteContact={deleteContact}
-        selectedContacts={selectedContacts}
-        toggleSelect={toggleSelect}
       />
       {showModal && (
         <Modal

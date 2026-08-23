@@ -25,6 +25,7 @@ function ContactProvider({ children }) {
           },
         ];
   });
+  const [selectedContacts, setSelectedContacts] = useState([]);
 
   const addContact = (contact) => {
     const newContacts = [...contacts, contact];
@@ -66,9 +67,26 @@ function ContactProvider({ children }) {
     localStorage.setItem("contacts", JSON.stringify(newContacts));
   };
 
+  const toggleSelect = (id) => {
+    if (selectedContacts.includes(id)) {
+      setSelectedContacts(selectedContacts.filter((item) => item !== id));
+    } else {
+      setSelectedContacts([...selectedContacts, id]);
+    }
+  };
+
   return (
     <ContactContext.Provider
-      value={{ contacts, addContact, updateContact,deleteContact,deleteMultipleContacts }}
+      value={{
+        contacts,
+        addContact,
+        updateContact,
+        deleteContact,
+        deleteMultipleContacts,
+        selectedContacts,
+        setSelectedContacts,
+        toggleSelect
+      }}
     >
       {children}
     </ContactContext.Provider>

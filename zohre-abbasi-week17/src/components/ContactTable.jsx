@@ -1,4 +1,5 @@
-import { useState } from "react";
+import {useContext,useState } from "react";
+import { ContactContext } from "../context/ContactContext";
 import styles from "./ContactTable.module.css";
 
 function ContactTable({
@@ -6,9 +7,9 @@ function ContactTable({
   isSelectionMode,
   editContact,
   deleteContact,
-  selectedContacts,
-  toggleSelect,
 }) {
+  const { selectedContacts,toggleSelect } = useContext(ContactContext);
+
   const [openMenu, setOpenMenu] = useState(null);
   return (
     <table className={styles.table}>
