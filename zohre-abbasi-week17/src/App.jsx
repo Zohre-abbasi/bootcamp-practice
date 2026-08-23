@@ -8,7 +8,7 @@ import Toast from "./components/Toast.jsx";
 import ContactForm from "./components/ContactForm.jsx";
 
 function App() {
-  const{contacts,setContacts}=useContext(ContactContext)
+  const{contacts,setContacts,addContact,updateContact}=useContext(ContactContext)
 
   const [search, setSearch] = useState("");
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -97,34 +97,6 @@ function App() {
     window.toastTimer = setTimeout(() => {
       setToast("");
     }, 3000);
-  };
-
-  const addContact = (contact) => {
-    const newContacts = [...contacts, contact];
-
-    setContacts(newContacts);
-
-    localStorage.setItem("contacts", JSON.stringify(newContacts));
-
-    showToast("مخاطب با موفقیت اضافه شد.");
-  };
-
-  const updateContact = (updatedContact) => {
-    const newContacts = contacts.map((contact) =>
-      contact.id === updatedContact.id ? updatedContact : contact,
-    );
-
-    setContacts(newContacts);
-
-    localStorage.setItem(
-      "contacts",
-
-      JSON.stringify(newContacts),
-    );
-
-    setEditingContact(null);
-
-    showToast("مخاطب با موفقیت ویرایش شد.");
   };
 
   const toggleSelect = (id) => {

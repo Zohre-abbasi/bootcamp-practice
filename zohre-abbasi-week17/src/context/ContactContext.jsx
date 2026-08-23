@@ -26,8 +26,30 @@ function ContactProvider({ children }) {
         ];
   });
 
+  const addContact = (contact) => {
+    const newContacts = [...contacts, contact];
+
+    setContacts(newContacts);
+
+    localStorage.setItem("contacts", JSON.stringify(newContacts));
+  };
+
+  const updateContact = (updatedContact) => {
+    const newContacts = contacts.map((contact) =>
+      contact.id === updatedContact.id ? updatedContact : contact,
+    );
+
+    setContacts(newContacts);
+
+    localStorage.setItem(
+      "contacts",
+
+      JSON.stringify(newContacts),
+    );
+  };
+
   return (
-    <ContactContext.Provider value={{ contacts, setContacts }}>
+    <ContactContext.Provider value={{ contacts, setContacts, addContact,updateContact }}>
       {children}
     </ContactContext.Provider>
   );
