@@ -68,7 +68,7 @@ function ContactProvider({ children }) {
 
   return (
     <ContactContext.Provider
-      value={{ contacts, setContacts, addContact, updateContact,deleteContact,deleteMultipleContacts }}
+      value={{ contacts, addContact, updateContact,deleteContact,deleteMultipleContacts }}
     >
       {children}
     </ContactContext.Provider>

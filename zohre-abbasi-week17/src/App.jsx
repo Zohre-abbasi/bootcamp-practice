@@ -1,4 +1,4 @@
-import { useContext,useState } from "react";
+import { useContext, useState } from "react";
 import { ContactContext } from "./context/ContactContext.jsx";
 
 import Header from "./components/Header.jsx";
@@ -8,7 +8,13 @@ import Toast from "./components/Toast.jsx";
 import ContactForm from "./components/ContactForm.jsx";
 
 function App() {
-  const{contacts,setContacts,addContact,updateContact,deleteContact:deleteContactFromContext,deleteMultipleContacts}=useContext(ContactContext)
+  const {
+    contacts,
+    addContact,
+    updateContact,
+    deleteContact: deleteContactFromContext,
+    deleteMultipleContacts,
+  } = useContext(ContactContext);
 
   const [search, setSearch] = useState("");
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -20,7 +26,6 @@ function App() {
   const [selectedContacts, setSelectedContacts] = useState([]);
   const [modalType, setModalType] = useState("");
 
-  
   const openForm = () => {
     setIsFormOpen(true);
   };
@@ -43,11 +48,11 @@ function App() {
 
   const confirmDelete = () => {
     if (modalType === "single") {
-      deleteContactFromContext(selectedContact.id)
+      deleteContactFromContext(selectedContact.id);
 
       showToast("مخاطب با موفقیت حذف شد.");
     } else if (modalType === "multiple") {
-     deleteMultipleContacts(selectedContacts)
+      deleteMultipleContacts(selectedContacts);
 
       setSelectedContacts([]);
 
@@ -78,6 +83,16 @@ function App() {
       setToast("");
     }, 3000);
   };
+
+  const handleAddContact = (contact) => {
+    addContact(contact);
+    showToast("مخاطب با موفقیت اضافه شد");
+  };
+
+  const handleUpdateContact=(contact)=>{
+    updateContact(contact);
+    showToast("مخاطب با موفقیت ویرایش شد")
+  }
 
   const toggleSelect = (id) => {
     if (selectedContacts.includes(id)) {
@@ -139,8 +154,8 @@ function App() {
       {toast && <Toast message={toast} />}
       {isFormOpen && (
         <ContactForm
-          addContact={addContact}
-          updateContact={updateContact}
+          addContact={handleAddContact}
+          updateContact={handleUpdateContact}
           editingContact={editingContact}
           closeForm={() => {
             setIsFormOpen(false);
