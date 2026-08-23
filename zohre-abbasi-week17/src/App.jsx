@@ -8,7 +8,7 @@ import Toast from "./components/Toast.jsx";
 import ContactForm from "./components/ContactForm.jsx";
 
 function App() {
-  const{contacts,setContacts,addContact,updateContact}=useContext(ContactContext)
+  const{contacts,setContacts,addContact,updateContact,deleteContact:deleteContactFromContext,deleteMultipleContacts}=useContext(ContactContext)
 
   const [search, setSearch] = useState("");
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -43,31 +43,11 @@ function App() {
 
   const confirmDelete = () => {
     if (modalType === "single") {
-      const newContacts = contacts.filter(
-        (item) => item.id !== selectedContact.id,
-      );
-
-      setContacts(newContacts);
-
-      localStorage.setItem(
-        "contacts",
-
-        JSON.stringify(newContacts),
-      );
+      deleteContactFromContext(selectedContact.id)
 
       showToast("مخاطب با موفقیت حذف شد.");
     } else if (modalType === "multiple") {
-      const newContacts = contacts.filter(
-        (item) => !selectedContacts.includes(item.id),
-      );
-
-      setContacts(newContacts);
-
-      localStorage.setItem(
-        "contacts",
-
-        JSON.stringify(newContacts),
-      );
+     deleteMultipleContacts(selectedContacts)
 
       setSelectedContacts([]);
 

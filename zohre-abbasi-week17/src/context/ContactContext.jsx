@@ -48,8 +48,28 @@ function ContactProvider({ children }) {
     );
   };
 
+  const deleteContact = (contactId) => {
+    const newContacts = contacts.filter((contact) => contact.id !== contactId);
+
+    setContacts(newContacts);
+
+    localStorage.setItem("contacts", JSON.stringify(newContacts));
+  };
+
+  const deleteMultipleContacts = (selectedContacts) => {
+    const newContacts = contacts.filter(
+      (contact) => !selectedContacts.includes(contact.id),
+    );
+
+    setContacts(newContacts);
+
+    localStorage.setItem("contacts", JSON.stringify(newContacts));
+  };
+
   return (
-    <ContactContext.Provider value={{ contacts, setContacts, addContact,updateContact }}>
+    <ContactContext.Provider
+      value={{ contacts, setContacts, addContact, updateContact,deleteContact,deleteMultipleContacts }}
+    >
       {children}
     </ContactContext.Provider>
   );
