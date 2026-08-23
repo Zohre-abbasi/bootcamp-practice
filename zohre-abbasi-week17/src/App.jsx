@@ -148,8 +148,6 @@ function App() {
       {toast && <Toast message={toast} />}
       {isFormOpen && (
         <ContactForm
-          addContact={handleAddContact}
-          updateContact={handleUpdateContact}
           editingContact={editingContact}
           closeForm={() => {
             setIsFormOpen(false);

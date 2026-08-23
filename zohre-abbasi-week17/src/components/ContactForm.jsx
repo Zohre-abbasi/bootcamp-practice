@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { ContactContext } from "../context/ContactContext";
 import styles from "./ContactForm.module.css";
 
-function ContactForm({ addContact, closeForm, editingContact, updateContact }) {
+function ContactForm({ closeForm, editingContact }) {
+  
+  const { addContact, updateContact } = useContext(ContactContext);
+
   const [form, setForm] = useState({
     id: editingContact?.id || null,
 
