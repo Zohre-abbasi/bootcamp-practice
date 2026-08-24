@@ -23,7 +23,7 @@ function App() {
   const [selectedContact, setSelectedContact] = useState(null);
   const [toast, setToast] = useState("");
   const [editingContact, setEditingContact] = useState(null);
-  // const [selectedContacts, setSelectedContacts] = useState([]);
+
   const [modalType, setModalType] = useState("");
 
   const openForm = () => {
@@ -83,16 +83,6 @@ function App() {
       setToast("");
     }, 3000);
   };
-
-  // const handleAddContact = (contact) => {
-  //   addContact(contact);
-  //   showToast("مخاطب با موفقیت اضافه شد");
-  // };
-
-  // const handleUpdateContact=(contact)=>{
-  //   updateContact(contact);
-  //   showToast("مخاطب با موفقیت ویرایش شد")
-  // }
 
   const deleteSelectedContacts = () => {
     if (selectedContacts.length === 0) {
