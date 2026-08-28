@@ -2,7 +2,10 @@ import { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ContactContext } from "../context/ContactContext";
+
 import contactSchema from "../validation/contactSchema";
+import FormInput from "./FormInput";
+
 import styles from "./ContactForm.module.css";
 
 function ContactForm({ closeForm, editingContact, showToast }) {
@@ -45,17 +48,33 @@ function ContactForm({ closeForm, editingContact, showToast }) {
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <h2>{editingContact ? "ویرایش مخاطب" : "افزودن مخاطب"}</h2>
 
-        <input {...register("fullName")} placeholder="نام و نام خانوادگی" />
-        {formErrors.fullName && <span>{formErrors.fullName.message}</span>}
+        <FormInput
+          name="fullName"
+          placeholder="نام و نام خانوادگی"
+          register={register}
+          error={formErrors.fullName}
+        />
 
-        <input {...register("email")} placeholder="ایمیل" />
-        {formErrors.email && <span>{formErrors.email.message}</span>}
+        <FormInput
+          name="email"
+          placeholder="ایمیل"
+          register={register}
+          error={formErrors.email}
+        />
 
-        <input {...register("job")} placeholder="شغل" />
-        {formErrors.job && <span>{formErrors.job.message}</span>}
+        <FormInput
+          name="job"
+          placeholder="شغل"
+          register={register}
+          error={formErrors.job}
+        />
 
-        <input {...register("phone")} placeholder="تلفن همراه" />
-        {formErrors.phone && <span>{formErrors.phone.message}</span>}
+        <FormInput
+          name="phone"
+          placeholder="تلفن همراه"
+          register={register}
+          error={formErrors.phone}
+        />
 
         <div className={styles.buttons}>
           <button type="button" onClick={closeForm}>
