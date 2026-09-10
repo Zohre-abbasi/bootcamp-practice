@@ -1,0 +1,199 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 1000px;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 68px;
+  border-radius: 16px;
+  opacity: 1;
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  margin-top: 25px;
+  margin-bottom: 35px;
+}
+.search {
+  position: relative;
+  width: 820px;
+  display: flex;
+  margin-right: 13px;
+}
+.search input {
+  width: 100%;
+  height: 65px;
+  border: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif, Helvetica, sans-serif;
+  font-weight: 400;
+  color: #00000099;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: right;
+  outline: none;
+  padding-right: 40px;
+}
+.search img {
+  width: 24px;
+  height: 24px;
+  color: #282828;
+  position: absolute;
+  right: 10px;
+  top: 36%;
+}
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 160px;
+  height: 52px;
+  padding-left: 20px;
+}
+.profile image {
+  width: 46px;
+  height: 46px;
+}
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+  color: #282828;
+}
+.profile span:first-child {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0%;
+
+}
+.profile span:last-child {
+  font-family: verdana;
+  font-weight: 300;
+  font-style: Light;
+  font-size: 11px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: right;
+}
+.main {
+  width: 100%;
+}
+.titleSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.title img {
+  width: 30px;
+  height: 30px;
+  opacity: 1;
+}
+.title h2 {
+  font-family: verdana;
+  font-weight: 400;
+  color: #282828;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+.titleSection button {
+  width: 132px;
+  height: 45px;
+  border-radius: 10px;
+  background: #55a3f0;
+  color: #fff;
+  opacity: 1;
+  padding: 10px;
+  gap: 10px;
+  border: none;
+  font-family: Verdana;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  cursor: pointer;
+}
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 30px;
+  min-height: 450px;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+ 
+}
+th,
+td {
+  padding: 18px 70px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+thead tr {
+  background: #f2f2f2;
+}
+th {
+  font-family: Verdana;
+  font-weight: 600;
+  font-style: Medium;
+  font-size: 17px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: right;
+}
+td {
+  font-family: Verdana;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: right;
+}
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+}
+.actions button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.actions img {
+  width: 20px;
+  height: 20px;
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 35px;
+}
+.pagination button {
+  width: 35px;
+  height: 35px;
+  border: 1px solid #bbb8b8;
+  border-radius: 42px;
+  cursor: pointer;
+  background-color: white;
+  opacity: 1;
+}

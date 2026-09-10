@@ -6,10 +6,9 @@ import ProductsPage from "./pages/ProductsPage";
 function App() {
   return (
     <div>
-      <h1>Admin pages</h1>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/products" element={<ProductsPage />} />
       </Routes>
     </div>
