@@ -97,3 +97,8 @@
 .login a {
   text-decoration: none;
 }
+.inputs span {
+  color: red;
+  font-size: 13px;
+  align-self: flex-start;
+}

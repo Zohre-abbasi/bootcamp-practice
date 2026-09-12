@@ -4,7 +4,6 @@
   align-items: center;
   justify-content: center;
   margin-top: 40px;
-  
 }
 .page h1 {
   font-family: Kalameh;
@@ -95,8 +94,20 @@
   text-align: right;
   color: #3a8bed;
   margin-bottom: 40px;
-  
 }
-.register a{
-    text-decoration: none;
+.register a {
+  text-decoration: none;
+}
+.inputs span {
+  color: red;
+  font-size: 13px;
+  align-self: flex-start;
+}
+.success {
+  color: green;
+  font-size: 13px;
+}
+.error {
+  color: red;
+  font-size: 13px;
 }
