@@ -45,6 +45,7 @@
   position: absolute;
   right: 10px;
   top: 36%;
+  
 }
 .profile {
   display: flex;
@@ -71,7 +72,6 @@
   font-size: 12px;
   line-height: 100%;
   letter-spacing: 0%;
-
 }
 .profile span:last-child {
   font-family: verdana;
@@ -138,11 +138,37 @@
 .table {
   width: 100%;
   border-collapse: collapse;
- 
+  table-layout: fixed;
 }
+
+th:nth-child(1),
+td:nth-child(1) {
+  width: 25%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 15%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 15%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  width: 30%;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+  width: 15%;
+}
+
 th,
 td {
-  padding: 18px 70px;
+  padding: 18px 45px;
   text-align: center;
   border-bottom: 1px solid #eee;
 }
@@ -194,6 +220,20 @@ td {
   border: 1px solid #bbb8b8;
   border-radius: 42px;
   cursor: pointer;
-  background-color: white;
+  /* background-color: white; */
   opacity: 1;
+}
+.message {
+  color: red;
+  text-align: center;
+  margin: 20px 0;
+}
+.idCell {
+  white-space: nowrap;
+  direction: ltr;
+  font-size: 13px;
+}
+.activePage {
+  font-weight: bold;
+  background-color: #55a3f0;
 }
