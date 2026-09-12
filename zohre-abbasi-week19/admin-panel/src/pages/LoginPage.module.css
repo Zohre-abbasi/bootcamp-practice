@@ -57,6 +57,7 @@
 }
 .inputs input {
   align-items: center;
+  outline: none;
   width: 400px;
   height: 53px;
   opacity: 1;

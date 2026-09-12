@@ -6,6 +6,7 @@ import edit from "../assets/images/edit.png";
 import line from "../assets/images/line.png";
 import { useEffect, useState } from "react";
 import api from "../services/config";
+import AddProductModal from "../components/AddProductModal";
 
 import styles from "./ProductsPage.module.css";
 
@@ -17,11 +18,10 @@ function ProductsPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [searchName, setSearchName] = useState("");
   const [searchInput, setSearchInput] = useState("");
+  const [showAddProduct, setShowAddProduct] = useState(false);
+ 
 
-  // const handleSearch = () => {
-  //   setPage(1);
-  //   setSearchName(searchInput.trim());
-  // };
+  
   useEffect(() => {
     const timer = setTimeout(() => {
       setSearchName(searchInput.trim());
@@ -93,7 +93,7 @@ function ProductsPage() {
             <img src={product} alt="" />
             <h2>مدیریت کالا</h2>
           </div>
-          <button>افزودن محصول</button>
+          <button onClick={() => setShowAddProduct(true)}>افزودن محصول</button>
         </div>
         {loading && <p>در حال دریافت محصولات...</p>}
 
@@ -153,6 +153,9 @@ function ProductsPage() {
           </button>
         </div>
       </main>
+      {showAddProduct && (
+        <AddProductModal onClose={() => setShowAddProduct(false)} />
+      )}
     </div>
   );
 }
