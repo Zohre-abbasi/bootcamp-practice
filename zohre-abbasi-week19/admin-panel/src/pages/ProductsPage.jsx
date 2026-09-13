@@ -7,6 +7,7 @@ import line from "../assets/images/line.png";
 import { useEffect, useState } from "react";
 import api from "../services/config";
 import AddProductModal from "../components/AddProductModal";
+import DeleteProductModal from "../components/DeleteProductModal";
 
 import styles from "./ProductsPage.module.css";
 
@@ -20,6 +21,7 @@ function ProductsPage() {
   const [searchInput, setSearchInput] = useState("");
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [productMessage, setProductMessage] = useState("");
+  const [deleteProduct, setDeleteProduct] = useState(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -67,6 +69,18 @@ function ProductsPage() {
   const handleProductAdded = async () => {
     await getProducts();
     setProductMessage("محصول با موفقیت اضافه شد");
+    setTimeout(() => {
+      setProductMessage("");
+    }, 3000);
+  };
+  const handleProductDeleted = async () => {
+    if (page > 1 && products.length === 1) {
+      setPage(page - 1);
+    } else {
+      await getProducts();
+    }
+
+    setProductMessage("محصول با موفقست حذف شد");
     setTimeout(() => {
       setProductMessage("");
     }, 3000);
@@ -133,7 +147,11 @@ function ProductsPage() {
                         <img src={edit} alt="ویرایش" />
                       </button>
                       <button>
-                        <img src={deleted} alt="حذف" />
+                        <img
+                          src={deleted}
+                          alt="حذف"
+                          onClick={() => setDeleteProduct(item)}
+                        />
                       </button>
                     </div>
                   </td>
@@ -167,6 +185,13 @@ function ProductsPage() {
         <AddProductModal
           onClose={() => setShowAddProduct(false)}
           onProductAdded={handleProductAdded}
+        />
+      )}
+      {deleteProduct && (
+        <DeleteProductModal
+          product={deleteProduct}
+          onClose={() => setDeleteProduct(null)}
+          onProductDeleted={handleProductDeleted}
         />
       )}
     </div>

@@ -1,0 +1,73 @@
+.overlay {
+  backdrop-filter: blur(10px);
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #3333337d;
+}
+.modal {
+  width: 472px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal img {
+  margin: 0 auto;
+  text-align: center;
+  width: 96px;
+  height: 97px;
+}
+
+.modal p {
+  margin: 0;
+  text-align: center;
+  line-height: 1.8;
+  font-family: Verdana;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #282828;
+}
+
+.message {
+  color: red;
+  font-size: 14px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.buttons button {
+  width: 160px;
+  height: 41px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  opacity: 1;
+  padding: 10px;
+  gap: 10px;
+  background: #dfdfdf;
+  color: #282828cc;
+  font-family: Verdana;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+}
+.buttons button:hover{
+    background: #F43F5E;
+    color:#fff;
+
+}
