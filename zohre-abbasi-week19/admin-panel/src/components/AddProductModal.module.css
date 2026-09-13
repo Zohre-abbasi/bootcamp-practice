@@ -94,3 +94,8 @@
   color: red;
   font-size: 13px;
 }
+.message {
+  color: red;
+  text-align: center;
+  font-size: 14px;
+}

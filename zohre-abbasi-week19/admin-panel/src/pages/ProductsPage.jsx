@@ -19,9 +19,8 @@ function ProductsPage() {
   const [searchName, setSearchName] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const [showAddProduct, setShowAddProduct] = useState(false);
- 
+  const [productMessage, setProductMessage] = useState("");
 
-  
   useEffect(() => {
     const timer = setTimeout(() => {
       setSearchName(searchInput.trim());
@@ -33,37 +32,45 @@ function ProductsPage() {
     };
   }, [searchInput]);
 
+  const getProducts = async () => {
+    try {
+      setLoading(true);
+      setMessage("");
+
+      const response = await api.get("/products", {
+        params: {
+          page,
+          limit: 2,
+          ...(searchName && { name: searchName }),
+        },
+      });
+
+      console.log("Products response:", response.data);
+
+      setProducts(response.data.data);
+      setTotalPages(response.data.totalPages);
+    } catch (error) {
+      console.log("Products error:", error);
+
+      setMessage(
+        error.response?.data?.message || "خطایی در دریافت محصولات رخ داد",
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const getProducts = async () => {
-      try {
-        setLoading(true);
-        setMessage("");
-
-        const response = await api.get("/products", {
-          params: {
-            page,
-            limit: 2,
-            ...(searchName && { name: searchName }),
-          },
-        });
-
-        console.log("Products response:", response.data);
-
-        setProducts(response.data.data);
-        setTotalPages(response.data.totalPages);
-      } catch (error) {
-        console.log("Products error:", error);
-
-        setMessage(
-          error.response?.data?.message || "خطایی در دریافت محصولات رخ داد",
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-
     getProducts();
   }, [page, searchName]);
+
+  const handleProductAdded = async () => {
+    await getProducts();
+    setProductMessage("محصول با موفقیت اضافه شد");
+    setTimeout(() => {
+      setProductMessage("");
+    }, 3000);
+  };
 
   return (
     <div className={styles.page}>
@@ -95,6 +102,9 @@ function ProductsPage() {
           </div>
           <button onClick={() => setShowAddProduct(true)}>افزودن محصول</button>
         </div>
+        {productMessage && (
+          <p className={styles.successMessage}>{productMessage}</p>
+        )}
         {loading && <p>در حال دریافت محصولات...</p>}
 
         {message && <p className={styles.message}>{message}</p>}
@@ -154,7 +164,10 @@ function ProductsPage() {
         </div>
       </main>
       {showAddProduct && (
-        <AddProductModal onClose={() => setShowAddProduct(false)} />
+        <AddProductModal
+          onClose={() => setShowAddProduct(false)}
+          onProductAdded={handleProductAdded}
+        />
       )}
     </div>
   );

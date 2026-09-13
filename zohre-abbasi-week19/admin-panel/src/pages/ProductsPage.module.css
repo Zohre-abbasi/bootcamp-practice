@@ -45,7 +45,6 @@
   position: absolute;
   right: 10px;
   top: 36%;
-  
 }
 .profile {
   display: flex;
@@ -213,6 +212,7 @@ td {
   justify-content: center;
   gap: 10px;
   margin-top: 35px;
+  margin-bottom: 30px;
 }
 .pagination button {
   width: 35px;
@@ -220,7 +220,6 @@ td {
   border: 1px solid #bbb8b8;
   border-radius: 42px;
   cursor: pointer;
-  /* background-color: white; */
   opacity: 1;
 }
 .message {
@@ -236,4 +235,19 @@ td {
 .activePage {
   font-weight: bold;
   background-color: #55a3f0;
+}
+
+.successMessage {
+  position: fixed;
+  top: 130px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  color: #2e7d32;
+  background-color: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+  z-index: 1000;
 }

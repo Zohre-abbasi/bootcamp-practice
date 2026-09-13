@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import api from "../services/config";
+import { useState } from "react";
 
 import styles from "./AddProductModal.module.css";
 
@@ -24,7 +26,8 @@ const schema = yup.object({
     .min(0, "تعداد موجودی نمی تواند منفی باشد"),
 });
 
-function AddProductModal({ onClose }) {
+function AddProductModal({ onClose, onProductAdded }) {
+  const [message, setMessage] = useState("");
   const {
     register,
     handleSubmit,
@@ -34,9 +37,21 @@ function AddProductModal({ onClose }) {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log("Product data:", data);
-    reset();
+  const onSubmit = async (data) => {
+    try {
+      setMessage("");
+      const response = await api.post("/products", data);
+      console.log("product respons:", response.data);
+
+      reset();
+      await onProductAdded();
+      onClose();
+    } catch (error) {
+      console.log("product error:", error);
+      setMessage(
+        error.response?.data?.message || "خطایی در ایجاد محصول رخ داد",
+      );
+    }
   };
 
   return (
@@ -58,9 +73,12 @@ function AddProductModal({ onClose }) {
           <input type="number" placeholder="قیمت" {...register("price")} />
           {errors.price && <span>{errors.price.message}</span>}
         </div>
+        {message && <p className={styles.message}>{message}</p>}
         <div className={styles.buttons}>
           <button type="submit">ایجاد</button>
-          <button type="button" onClick={onClose}>لغو</button>
+          <button type="button" onClick={onClose}>
+            لغو
+          </button>
         </div>
       </form>
     </div>
