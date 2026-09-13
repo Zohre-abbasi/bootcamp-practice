@@ -1,0 +1,101 @@
+.overlay {
+  backdrop-filter: blur(10px);
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #3333337d;
+}
+.modal {
+  width: 460px;
+  border-radius: 30px;
+  background: #ffffff;
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+.modal h2 {
+  margin: 10px 10px;
+  text-align: center;
+  font-family: verdana;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 20px;
+  color: #282828;
+
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 10px auto;
+}
+.inputGroup label {
+  font-family: verdana;
+  font-weight: 600;
+  font-style: Medium;
+  font-size: 15px;
+  color: #282828;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: right;
+}
+.inputGroup input {
+  background: #f2f2f2;
+  border: none;
+  outline: none;
+  width: 389px;
+  height: 42px;
+  border-radius: 8px;
+  opacity: 1;
+  padding: 10px;
+  margin: 10px auto;
+  font-family: verdana;
+  font-weight: 300;
+  font-style: Light;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: right;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.buttons button {
+  width: 185px;
+  height: 35px;
+  border-radius: 10px;
+  background: #dfdfdf;
+  color: #282828cc;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  border: none;
+}
+.buttons button:hover {
+  background: #55a3f0;
+  color: #fff;
+}
+.inputGroup span {
+  color: red;
+  font-size: 13px;
+}
+.message {
+  color: red;
+  text-align: center;
+  font-size: 14px;
+}

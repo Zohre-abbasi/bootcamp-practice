@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import api from "../services/config";
 import AddProductModal from "../components/AddProductModal";
 import DeleteProductModal from "../components/DeleteProductModal";
+import EditProductModal from "../components/EditProductModal";
 
 import styles from "./ProductsPage.module.css";
 
@@ -22,6 +23,7 @@ function ProductsPage() {
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [productMessage, setProductMessage] = useState("");
   const [deleteProduct, setDeleteProduct] = useState(null);
+  const [editProduct, setEditProduct] = useState(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -86,6 +88,16 @@ function ProductsPage() {
     }, 3000);
   };
 
+  const handleProductUpdated = async () => {
+    await getProducts();
+
+    setProductMessage("محصول با موفقیت ویرایش شد");
+
+    setTimeout(() => {
+      setProductMessage("");
+    }, 3000);
+  };
+
   return (
     <div className={styles.page}>
       <header className={styles.header}>
@@ -144,7 +156,11 @@ function ProductsPage() {
                   <td>
                     <div className={styles.actions}>
                       <button>
-                        <img src={edit} alt="ویرایش" />
+                        <img
+                          src={edit}
+                          alt="ویرایش"
+                          onClick={() => setEditProduct(item)}
+                        />
                       </button>
                       <button>
                         <img
@@ -192,6 +208,13 @@ function ProductsPage() {
           product={deleteProduct}
           onClose={() => setDeleteProduct(null)}
           onProductDeleted={handleProductDeleted}
+        />
+      )}
+      {editProduct && (
+        <EditProductModal
+          product={editProduct}
+          onClose={() => setEditProduct(null)}
+          onProductUpdated={handleProductUpdated}
         />
       )}
     </div>
