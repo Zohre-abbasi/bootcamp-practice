@@ -1,11 +1,12 @@
+import { useEffect, useState } from "react";
+import { getProducts as fetchProducts } from "../services/productService";
+
 import profile from "../assets/images/profile.png";
 import product from "../assets/images/product.png";
 import search from "../assets/images/search.png";
 import deleted from "../assets/images/deleted.png";
 import edit from "../assets/images/edit.png";
 import line from "../assets/images/line.png";
-import { useEffect, useState } from "react";
-import api from "../services/config";
 import AddProductModal from "../components/AddProductModal";
 import DeleteProductModal from "../components/DeleteProductModal";
 import EditProductModal from "../components/EditProductModal";
@@ -41,21 +42,15 @@ function ProductsPage() {
       setLoading(true);
       setMessage("");
 
-      const response = await api.get("/products", {
-        params: {
-          page,
-          limit: 2,
-          ...(searchName && { name: searchName }),
-        },
+      const data = await fetchProducts({
+        page,
+        limit: 2,
+        ...(searchName && { name: searchName }),
       });
 
-      console.log("Products response:", response.data);
-
-      setProducts(response.data.data);
-      setTotalPages(response.data.totalPages);
+      setProducts(data.data);
+      setTotalPages(data.totalPages);
     } catch (error) {
-      console.log("Products error:", error);
-
       setMessage(
         error.response?.data?.message || "خطایی در دریافت محصولات رخ داد",
       );
@@ -153,6 +148,7 @@ function ProductsPage() {
                   <td>{item.quantity}</td>
                   <td>{item.price}</td>
                   <td className={styles.idCell}>{item.id}</td>
+
                   <td>
                     <div className={styles.actions}>
                       <button>
@@ -219,8 +215,6 @@ function ProductsPage() {
       )}
     </div>
   );
-}
-{
 }
 
 export default ProductsPage;

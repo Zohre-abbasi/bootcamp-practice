@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import api from "../services/config";
+import { addProduct } from "../services/productService";
 import { useState } from "react";
+
+import * as yup from "yup";
 
 import styles from "./AddProductModal.module.css";
 
@@ -40,14 +41,12 @@ function AddProductModal({ onClose, onProductAdded }) {
   const onSubmit = async (data) => {
     try {
       setMessage("");
-      const response = await api.post("/products", data);
-      console.log("product respons:", response.data);
+      const response = await addProduct(data);
 
       reset();
       await onProductAdded();
       onClose();
     } catch (error) {
-      console.log("product error:", error);
       setMessage(
         error.response?.data?.message || "خطایی در ایجاد محصول رخ داد",
       );

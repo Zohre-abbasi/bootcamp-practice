@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
+import { updateProduct } from "../services/productService";
 
-import api from "../services/config";
+import * as yup from "yup";
 
 import styles from "./EditProductModal.module.css";
 
@@ -48,14 +48,12 @@ function EditProductModal({ product, onClose, onProductUpdated }) {
     try {
       setMessage("");
 
-      await api.put(`/products/${product.id}`, data);
+      await updateProduct(product.id, data);
 
       await onProductUpdated();
 
       onClose();
     } catch (error) {
-      console.log("Edit product error:", error);
-
       setMessage(
         error.response?.data?.message || "خطایی در ویرایش محصول رخ داد",
       );

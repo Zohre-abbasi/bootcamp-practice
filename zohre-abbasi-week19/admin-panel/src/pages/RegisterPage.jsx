@@ -32,30 +32,6 @@ function RegisterPage() {
     resolver: yupResolver(schema),
   });
 
-  // const onSubmit = async (data) => {
-  //   console.log("form:", data);
-  //   try {
-  //     const response = await api.post("/auth/register", {
-  //       username: data.username,
-  //       password: data.password,
-  //     });
-
-  //     console.log("Register response:", response.data);
-
-  //     alert("ثبت نام با موفقیت انجام شد");
-  //   } catch (error) {
-  //     console.log("Register error:", error);
-
-  //     if (error.response?.status === 400) {
-  //       alert("این نام کاربری قبلاً ثبت شده است");
-  //     } else {
-  //       alert("خطایی در ثبت نام رخ داد");
-  //     }
-  //   }
-  // };
-  // const onSubmit=(data)=>{
-  //   console.log("data:",data)
-  // }
   const onSubmit = async (data) => {
     try {
       setRegisterError("");
@@ -65,12 +41,8 @@ function RegisterPage() {
         password: data.password,
       });
 
-      console.log("Register response:", response.data);
-
       setRegisterSuccess("ثبت نام با موفقیت انجام شد");
     } catch (error) {
-      console.log("Register error:", error);
-
       if (error.response?.status === 400) {
         setRegisterError("این نام کاربری قبلاً ثبت شده است");
       } else {
@@ -78,23 +50,6 @@ function RegisterPage() {
       }
     }
   };
-  // const onError = (errors) => {
-  //   console.log("Validation errors:", errors);
-
-  //   if (errors.username) {
-  //     alert(errors.username.message);
-  //     return;
-  //   }
-
-  //   if (errors.password) {
-  //     alert(errors.password.message);
-  //     return;
-  //   }
-
-  //   if (errors.confirmPassword) {
-  //     alert(errors.confirmPassword.message);
-  //   }
-  // };
 
   return (
     <div className={styles.page}>

@@ -1,10 +1,10 @@
-import logo from "../assets/images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 
+import * as yup from "yup";
+import logo from "../assets/images/logo.png";
 import api from "../services/config";
 
 import styles from "./LoginPage.module.css";
@@ -31,12 +31,10 @@ function LoginPage() {
         username: data.username,
         password: data.password,
       });
-      console.log("Login response:", response.data);
+
       localStorage.setItem("token", response.data.token);
       navigate("/products");
     } catch (error) {
-      console.log("Login error:", error);
-
       if (error.response?.status === 400) {
         setLoginError("نام کاربری یا رمز عبور اشتباه هست");
       } else {
