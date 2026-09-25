@@ -1,0 +1,93 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  direction: rtl;
+}
+
+.modal {
+  width: 450px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.modal h2 {
+  margin: 0 0 25px;
+  text-align: center;
+  font-family: Verdana, sans-serif;
+  font-size: 20px;
+  color: #282828;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal input {
+  width: 100%;
+  height: 48px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 0 15px;
+  outline: none;
+  font-family: Verdana, sans-serif;
+  text-align: right;
+}
+
+.modal input:focus {
+  border-color: #55a3f0;
+}
+
+.modal p {
+  text-align: center;
+  font-family: Verdana, sans-serif;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.buttons button {
+  flex: 1;
+  height: 45px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: Verdana, sans-serif;
+  font-size: 14px;
+}
+
+.buttons button:first-child {
+  background: #eee;
+  color: #333;
+}
+
+.buttons button:last-child {
+  background: #55a3f0;
+  color: #fff;
+}
+
+.buttons button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #d32f2f;
+  font-size: 13px;
+  text-align: center;
+  margin: 0;
+}
